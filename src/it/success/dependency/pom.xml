@@ -45,10 +45,10 @@
         </dependencies>
         <configuration>
           <javacArguments>
-            <javacArgument>-XDcompilePolicy=simple</javacArgument>
-            <javacArgument>-Xplugin:ErrorProne</javacArgument>
-            <javacArgument>-processorpath</javacArgument>
-            <javacArgument>${com.google.errorprone:error_prone_core:jar.classpath}</javacArgument>
+            <argument>-XDcompilePolicy=simple</argument>
+            <argument>-Xplugin:ErrorProne</argument>
+            <argument>-processorpath</argument>
+            <argument>${com.google.errorprone:error_prone_core:jar.classpath}</argument>
           </javacArguments>
           <sbtZincCacheDirectory>${project.build.directory}/zinc</sbtZincCacheDirectory>
         </configuration>
@@ -71,7 +71,7 @@
             <artifactId>@project.artifactId@</artifactId>
             <configuration>
               <javacArguments combine.children="append">
-                <javacArgument>-J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${javac.version}/javac-${javac.version}.jar</javacArgument>
+                <argument>-J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${javac.version}/javac-${javac.version}.jar</argument>
               </javacArguments>
             </configuration>
           </plugin>

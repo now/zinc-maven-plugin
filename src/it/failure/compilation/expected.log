@@ -1,0 +1,23 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< ${project.groupId}:compilation >-------------------------
+[INFO] Building compilation ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ compilation ---
+[INFO] compiling 1 Scala source to ${project.build.directory}/its/failure/compilation/.build/classes ...
+[ERROR] ${project.build.directory}/its/failure/compilation/src/main/scala/A.scala:1:6: identifier expected but eof found.
+class
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.843 s
+[INFO] Finished at: 2021-01-25T18:14:47+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal ${project.groupId}:${project.artifactId}:${project.version}:compile (default) on project compilation: Execution default of goal ${project.groupId}:${project.artifactId}:${project.version}:compile failed. CompileFailed -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginExecutionException

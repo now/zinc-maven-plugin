@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>@project.groupId@</groupId>
+    <artifactId>success</artifactId>
+    <version>@project.version@</version>
+  </parent>
+
+  <artifactId>dependency</artifactId>
+
+  <properties>
+    <!-- dependency.pom -->
+    <javac.version>9+181-r4173-1</javac.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>@project.groupId@</groupId>
+        <artifactId>@project.artifactId@</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>initialize</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.errorprone</groupId>
+            <artifactId>error_prone_core</artifactId>
+            <version>@error_prone_core.version@</version>
+            <exclusions>
+              <exclusion>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <javacArguments>
+            <javacArgument>-XDcompilePolicy=simple</javacArgument>
+            <javacArgument>-Xplugin:ErrorProne</javacArgument>
+            <javacArgument>-processorpath</javacArgument>
+            <javacArgument>${com.google.errorprone:error_prone_core:jar.classpath}</javacArgument>
+          </javacArguments>
+          <sbtZincCacheDirectory>${project.build.directory}/zinc</sbtZincCacheDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>errorprone-for-java-8</id>
+
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>@project.groupId@</groupId>
+            <artifactId>@project.artifactId@</artifactId>
+            <configuration>
+              <javacArguments combine.children="append">
+                <javacArgument>-J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${javac.version}/javac-${javac.version}.jar</javacArgument>
+              </javacArguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

@@ -1,0 +1,40 @@
+((groovy-mode . ((fill-column . 100)
+                 (groovy-indent-offset . 2)
+                 (indent-tabs-mode . nil)))
+ (java-mode . ((adaptive-fill-function . now-c-mode-adaptive-fill-function)
+               (c-basic-offset . 2)
+               (c-comment-only-line-offset . (0 . 0))
+               (c-file-offsets . (;; This is the default java style
+                                  ;; from cc-styles.
+                                  (inline-open           . 0)
+                                  (topmost-intro-cont    . +)
+                                  (statement-block-intro . +)
+                                  (knr-argdecl-intro     . 5)
+                                  (substatement-open     . +)
+                                  (substatement-label    . +)
+                                  (label                 . +)
+                                  (statement-case-open   . +)
+                                  (brace-list-intro      . (first
+                                                            c-lineup-2nd-brace-entry-in-arglist
+                                                            c-lineup-class-decl-init-+
+                                                            +))
+                                  (access-label          . 0)
+                                  (inher-cont            . c-lineup-java-inher)
+                                  ;; Adjusted to match IntelliJ IDEA.
+                                  (arglist-intro         . now-c-arglist-intro)
+                                  (arglist-close         . 0)
+                                  (func-decl-cont        . ++)
+                                  (statement-cont        . ++)
+                                  ;; Added to match IntelliJ IDEA.
+                                  (arglist-cont-nonempty . now-c-lineup-arglist-decl-only)
+                                  (annotation-var-cont   . 0)
+                                  (inexpr-class          . 0)
+                                  (inher-cont            . (add [0] ++))
+                                  (inher-intro           . ++)))
+               (fill-column . 100)
+               (indent-tabs-mode . nil)))
+ (nxml-mode . ((nxml-child-indent . 2)
+               (fill-column . 100)
+               (indent-tabs-mode . nil)))
+ (yaml-mode . ((fill-column . 100)
+               (indent-tabs-mode . nil))))

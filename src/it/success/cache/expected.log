@@ -1,0 +1,31 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< ${project.groupId}:cache >----------------------------
+[INFO] Building cache ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ cache ---
+[INFO] compiling 1 Scala source to ${project.build.directory}/its/success/cache/${buildDirectory}/classes ...
+[INFO] done compiling
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.141 s
+[INFO] Finished at: 2021-01-26T09:20:37+01:00
+[INFO] ------------------------------------------------------------------------
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< ${project.groupId}:cache >----------------------------
+[INFO] Building cache ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ cache ---
+[INFO] All classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.852 s
+[INFO] Finished at: 2021-01-26T09:20:41+01:00
+[INFO] ------------------------------------------------------------------------

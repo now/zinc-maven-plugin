@@ -1,0 +1,16 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------------< ${project.groupId}:bridge >---------------------------
+[INFO] Building bridge ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ bridge ---
+[INFO] compiling 1 Scala source to ${project.build.directory}/its/success/bridge/${buildDirectory}/classes ...
+[INFO] done compiling
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.436 s
+[INFO] Finished at: 2021-01-02T12:04:41+01:00
+[INFO] ------------------------------------------------------------------------

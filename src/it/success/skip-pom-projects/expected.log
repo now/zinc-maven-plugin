@@ -1,0 +1,14 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< ${project.groupId}:skip-pom-projects >----------------------
+[INFO] Building skip-pom-projects ${project.version}
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ skip-pom-projects ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.486 s
+[INFO] Finished at: 2021-01-06T00:33:11+01:00
+[INFO] ------------------------------------------------------------------------

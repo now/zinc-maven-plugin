@@ -1,0 +1,20 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< ${project.groupId}:scala-version-too-old >--------------------
+[INFO] Building scala-version-too-old ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ scala-version-too-old ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.484 s
+[INFO] Finished at: 2021-01-06T00:33:16+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal ${project.groupId}:${project.artifactId}:${project.version}:compile (default) on project scala-version-too-old: Scala version 2.11.11 is too old; 2.11.12 or newer is required -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

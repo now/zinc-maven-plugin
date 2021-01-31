@@ -1,0 +1,22 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< ${project.groupId}:dependency >-------------------------
+[INFO] Building dependency ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.name}:${project.version}:initialize (default) @ dependency ---
+[INFO] 
+[INFO] --- ${project.name}:${project.version}:compile (default) @ dependency ---
+[INFO] compiling 1 Java source to ${project.build.directory}/its/success/dependency/.build/classes ...
+[WARNING] ${project.build.directory}/its/success/dependency/src/main/java/A.java:1:17: [DefaultPackage] Java classes shouldn't use default package
+public class A {
+^    (see https://errorprone.info/bugpattern/DefaultPackage)
+1 warning
+[INFO] done compiling
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.487 s
+[INFO] Finished at: 2021-01-26T17:09:15+01:00
+[INFO] ------------------------------------------------------------------------

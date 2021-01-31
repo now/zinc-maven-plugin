@@ -1,0 +1,177 @@
+- description: A message without any formats
+  template: message
+  expected: message
+- description: A single single quote shouldn’t generate an exception and will be stripped
+  template: me'ssage
+  expected: message
+- description: Two single quotes inside a pair of single quotes results in a single quote
+  template: me'ss''a'ge
+  expected: mess'age
+- description: A quote that extends the whole message
+  template: "'message'"
+  expected: message
+
+- description: A message with a right brace at the beginning
+  template: '}message'
+  expected: '}message'
+- description: A message with a right brace in the middle
+  template: mess}age
+  expected: mess}age
+- description: A message with a right brace at the end
+  template: message}
+  expected: message}
+
+- description: A message with a format at the beginning
+  template: '{0}ssage'
+  arguments: [me]
+  expected: message
+- description: A message with a format in the middle
+  template: me{0}age
+  arguments: [ss]
+  expected: message
+- description: A message with a format at the end
+  template: messa{0}
+  arguments: [ge]
+  expected: message
+
+- description: A message with a number
+  template: '{0,number,percent}'
+  arguments: [0.5]
+  expected: 50%
+
+- description: A message with an empty list
+  template:
+    &list1 "{0,list,0=empty,1=item {0},2=item {0} and {1},n=1=items {0};n=',' {0};-1=',' and {0}}"
+  arguments: [[]]
+  expected: empty
+- description: A message with a list containing one item
+  template: *list1
+  arguments: [[1]]
+  expected: item 1
+- description: A message with a list containing two items
+  template: *list1
+  arguments: [[1, 2]]
+  expected: item 1 and 2
+- description: A message with a list containing three items
+  template: *list1
+  arguments: [[1, 2, 3]]
+  expected: items 1, 2, and 3
+
+- description: A message with a list of one item, “a” (with a sub-list of one item, 1)
+  template:
+    &list2 A message with a list of {0,list,1=one item',' {0,list,2=“{0}” (with a sub-list of {1,list,1=one item',' {0},2=two items',' {0} and {1},n=1=n items',' {0};n=',' {0};-1=',' and {0}})},2=two items',' {0,list,2=“{0}” (with a sub-list of {1,list,1=one item',' {0},2=two items',' {0} and {1},n=1=n items',' {0};n=',' {0};-1=',' and {0}})} and {1,list,2=“{0}” (with a sub-list of {1,list,1=one item',' {0},2=two items',' {0} and {1},n=1=n items',' {0};n=',' {0};-1=',' and {0}})},n=1=n items',' {0,list,2=“{0}” (with a sub-list of {1,list,1=one item',' {0},2=two items',' {0} and {1},n=1=n items',' {0};n=',' {0};-1=',' and {0}})};n=',' {0,list,2=“{0}” (with a sub-list of {1,list,1=one item',' {0},2=two items',' {0} and {1},n=1=n items',' {0};n=',' {0};-1=',' and {0}})};-1=',' and {0,list,2=“{0}” (with a sub-list of {1,list,1=one item',' {0},2=two items',' {0} and {1},n=1=n items',' {0};n=',' {0};-1=',' and {0}})}}
+  arguments: [[["a", [1]]]]
+- description: A message with a list of two items, “a” (with a sub-list of one item, 1) and “b” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1]], ["c", [1, 2, 3]]]]
+- description: A message with a list of two items, “a” (with a sub-list of one item, 1) and “b” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2]], ["c", [1, 2, 3]]]]
+- description: A message with a list of two items, “a” (with a sub-list of one item, 1) and “b” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2, 3]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2, 3]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2, 3]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of one item, 1), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1]], ["b", [1, 2, 3]], ["c", [1, 2, 3]]]]
+- description: A message with a list of one item, “a” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2]]]]
+- description: A message with a list of two items, “a” (with a sub-list of two items, 1 and 2) and “b” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1]], ["c", [1, 2, 3]]]]
+- description: A message with a list of two items, “a” (with a sub-list of two items, 1 and 2) and “b” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2]], ["c", [1, 2, 3]]]]
+- description: A message with a list of two items, “a” (with a sub-list of two items, 1 and 2) and “b” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2, 3]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2, 3]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2, 3]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of two items, 1 and 2), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2]], ["b", [1, 2, 3]], ["c", [1, 2, 3]]]]
+- description: A message with a list of one item, “a” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]]]]
+- description: A message with a list of two items, “a” (with a sub-list of n items, 1, 2, and 3) and “b” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of one item, 1), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1]], ["c", [1, 2, 3]]]]
+- description: A message with a list of two items, “a” (with a sub-list of n items, 1, 2, and 3) and “b” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of two items, 1 and 2), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2]], ["c", [1, 2, 3]]]]
+- description: A message with a list of two items, “a” (with a sub-list of n items, 1, 2, and 3) and “b” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2, 3]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of one item, 1)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2, 3]], ["c", [1]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of two items, 1 and 2)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2, 3]], ["c", [1, 2]]]]
+- description: A message with a list of n items, “a” (with a sub-list of n items, 1, 2, and 3), “b” (with a sub-list of n items, 1, 2, and 3), and “c” (with a sub-list of n items, 1, 2, and 3)
+  template: *list2
+  arguments: [[["a", [1, 2, 3]], ["b", [1, 2, 3]], ["c", [1, 2, 3]]]]

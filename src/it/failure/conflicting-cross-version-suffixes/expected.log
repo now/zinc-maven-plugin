@@ -1,0 +1,20 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< ${project.groupId}:conflicting-cross-version-suffixes >-------------
+[INFO] Building conflicting-cross-version-suffixes ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ conflicting-cross-version-suffixes ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.496 s
+[INFO] Finished at: 2021-01-24T12:42:14+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal ${project.groupId}:${project.artifactId}:${project.version}:compile (default) on project conflicting-cross-version-suffixes: Conflicting cross-version suffixes for dependency “org.scala-lang.modules:scala-xml” (2.11 and 2.13) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

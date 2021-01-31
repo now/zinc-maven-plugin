@@ -1,0 +1,25 @@
+- description: Empty format should throw exception
+  template: me{}age
+  expected: Digit, 0…9, expected at “}age” in “me{}age”
+- description: Incomplete format without digit should throw exception
+  template: me{age
+  expected: Digit, 0…9, expected at “age” in “me{age”
+- description: Incomplete format without digit at end of template should throw exception
+  template: messa{
+  expected: Digit, 0…9, expected at end of “messa{”
+- description: Format with space before digit should throw exception
+  template: me{ 0}age
+  expected: Digit, 0…9, expected at “ 0}age” in “me{ 0}age”
+
+- description: Format with digit beyond 32-bit integer range should throw exception
+  template: me{2147483648}age
+  expected: >-
+    Argument number 2147483648 is larger than maximum argument number 2147483647 at “214748364…” in
+    “me{2147483648}age”
+
+- description: Incomplete format
+  template: messa{0
+  expected: ‘}’ expected at end of “messa{0”
+- description: Incomplete format with nested braces
+  template: messa{0,{
+  expected: ‘}’ expected at end of “messa{0,{”

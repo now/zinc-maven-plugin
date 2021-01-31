@@ -1,0 +1,15 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< ${project.groupId}:no-sources-to-compile >--------------------
+[INFO] Building no-sources-to-compile ${project.version}
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ no-sources-to-compile ---
+[INFO] Source directories “${project.build.directory}/its/success/no-sources-to-compile/src/main/java” and “${project.build.directory}/its/success/no-sources-to-compile/src/main/scala” don’t exist
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.472 s
+[INFO] Finished at: 2021-01-06T00:32:59+01:00
+[INFO] ------------------------------------------------------------------------

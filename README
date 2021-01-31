@@ -1,0 +1,9 @@
+                          zinc-maven-plugin
+
+  This Maven¹ plugin compiles Java² and Scala³ sources.  It’s very simple to
+  use, providing almost no configuration options, relying on the user to instead
+  specify the command-line options to use for each compiler as they see fit.
+
+¹ Read more about Maven on its homepage at http://maven.apache.org
+² The Java language: https://java.com/en/
+³ The Scala language: https://www.scala-lang.org

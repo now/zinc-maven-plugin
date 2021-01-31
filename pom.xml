@@ -9,10 +9,31 @@
   <artifactId>zinc-maven-plugin</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
+
+  <name>${project.groupId}:${project.artifactId}</name>
   <description>Maven wrapper for Zinc.</description>
+  <url>https://github.com/now/zinc-maven-plugin/</url>
+
+  <licenses>
+    <license>
+      <name>GNU Lesser Public License, Version 3</name>
+      <url>https://disu.se/licenses/lgpl-3.0/</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Nikolai Weibull</name>
+      <email>now@disu.se</email>
+      <organization>Disu.se</organization>
+      <organizationUrl>https://disu.se/</organizationUrl>
+    </developer>
+  </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:now/zinc-maven-plugin.git</connection>
+    <connection>scm:git:https://github.com/now/zinc-maven-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:now/zinc-maven-plugin.git</developerConnection>
+    <url>https://github.com/now/zinc-maven-plugin</url>
   </scm>
 
   <properties>
@@ -210,6 +231,23 @@
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <author>false</author>
+          <breakiterator>true</breakiterator>
+          <quiet>true</quiet>
+          <serialwarn>true</serialwarn>
+          <tags>
+            <tag>
+              <name>implSpec</name>
+              <placement>a</placement>
+              <head>Implementation Requirements:</head>
+            </tag>
+          </tags>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-plugin-plugin</artifactId>
         <version>3.6.0</version>
         <configuration>
@@ -259,8 +297,6 @@
         <version>3.2.1</version>
         <executions>
           <execution>
-            <id>attach-sources</id>
-            <phase>verify</phase>
             <goals>
               <goal>jar-no-fork</goal>
             </goals>

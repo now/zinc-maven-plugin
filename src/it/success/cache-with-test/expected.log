@@ -5,11 +5,11 @@
 [INFO] Building cache-with-test ${project.version}
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] --- ${project.name}:${project.version}:compile (default) @ cache-with-test ---
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ cache-with-test ---
 [INFO] compiling 1 Scala source to ${project.build.directory}/its/success/cache-with-test/${buildDirectory}/classes ...
 [INFO] done compiling
 [INFO] 
-[INFO] --- ${project.name}:${project.version}:testCompile (default) @ cache-with-test ---
+[INFO] --- ${project.artifactId}:${project.version}:testCompile (default) @ cache-with-test ---
 [INFO] compiling 1 Java source to ${project.build.directory}/its/success/cache-with-test/${buildDirectory}/test-classes ...
 [INFO] done compiling
 [INFO] ------------------------------------------------------------------------
@@ -25,10 +25,10 @@
 [INFO] Building cache-with-test ${project.version}
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] --- ${project.name}:${project.version}:compile (default) @ cache-with-test ---
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ cache-with-test ---
 [INFO] All classes are up to date
 [INFO] 
-[INFO] --- ${project.name}:${project.version}:testCompile (default) @ cache-with-test ---
+[INFO] --- ${project.artifactId}:${project.version}:testCompile (default) @ cache-with-test ---
 [INFO] All classes are up to date
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS

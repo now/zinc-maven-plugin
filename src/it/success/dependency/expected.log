@@ -5,9 +5,9 @@
 [INFO] Building dependency ${project.version}
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] --- ${project.name}:${project.version}:initialize (default) @ dependency ---
+[INFO] --- ${project.artifactId}:${project.version}:initialize (default) @ dependency ---
 [INFO] 
-[INFO] --- ${project.name}:${project.version}:compile (default) @ dependency ---
+[INFO] --- ${project.artifactId}:${project.version}:compile (default) @ dependency ---
 [INFO] compiling 1 Java source to ${project.build.directory}/its/success/dependency/.build/classes ...
 [WARNING] ${project.build.directory}/its/success/dependency/src/main/java/A.java:1:17: [DefaultPackage] Java classes shouldn't use default package
 public class A {

@@ -243,8 +243,10 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
   protected abstract List<String> sourceDirectories();
 
   private void doExecute() {
-    if (session.getCurrentProject().getPackaging().equals("pom")) {
-      return;
+    switch (session.getCurrentProject().getPackaging()) {
+      case "ear":
+      case "pom":
+        return;
     }
     ArtifactVersion scalaVersion =
         Stream.concat(

@@ -544,9 +544,6 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
         .ifPresentOrElse(
             b -> analysisStore.set(AnalysisContents.create(cr.analysis(), cr.setup())),
             () -> getLog().info(Messages.format("allClassesAreUpToDate")));
-    Optional.of(new File(outputDirectory()))
-        .filter(File::isDirectory)
-        .ifPresent(session.getCurrentProject().getArtifact()::setFile);
   }
 
   private static final Function<

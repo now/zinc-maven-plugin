@@ -248,39 +248,6 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
       case "pom":
         return;
     }
-    ArtifactVersion scalaVersion =
-        Stream.concat(
-                session.getCurrentProject().getArtifacts().stream(),
-                This.dependencyArtifacts(session, repositorySystem).stream())
-            .filter(a -> a.getGroupId().equals(SCALA_GROUP_ID))
-            .filter(a -> a.getArtifactId().equals(SCALA_LIBRARY_ARTIFACT_ID))
-            .findAny()
-            .map(Artifact::getVersion)
-            .map(DefaultArtifactVersion::new)
-            .orElseThrow(
-                () ->
-                    UncheckedMojoExecutionException.of(
-                        "missingDependency", SCALA_GROUP_ID, SCALA_LIBRARY_ARTIFACT_ID));
-    if (scalaVersion.compareTo(minimumScalaVersion) < 0)
-      throw UncheckedMojoExecutionException.of("scalaTooOld", scalaVersion, minimumScalaVersion);
-    session.getCurrentProject().getArtifacts().stream()
-        .filter(a -> crossId(a, "").isEmpty())
-        .collect(
-            groupingBy(
-                a -> a.getGroupId() + ":" + crossId(a, "$1"),
-                mapping(a -> crossId(a, "$2"), toSet())))
-        .entrySet()
-        .stream()
-        .filter(e -> e.getValue().size() > 1)
-        .sorted(comparing(e -> e.getKey()))
-        .map(e -> new Object[] {e.getKey(), e.getValue().stream().sorted().toArray(Object[]::new)})
-        .collect(collectingAndThen(toList(), Optional::of))
-        .filter(os -> !os.isEmpty())
-        .map(os -> UncheckedMojoExecutionException.of("conflictingCrossVersionSuffixes", os))
-        .ifPresent(
-            e -> {
-              throw e;
-            });
     List<Path> normalizedSourceDirectories =
         sourceDirectories().stream()
             .distinct()
@@ -318,6 +285,39 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
                   nonExistingSourceDirectories.size()));
       return;
     }
+    ArtifactVersion scalaVersion =
+        Stream.concat(
+                session.getCurrentProject().getArtifacts().stream(),
+                This.dependencyArtifacts(session, repositorySystem).stream())
+            .filter(a -> a.getGroupId().equals(SCALA_GROUP_ID))
+            .filter(a -> a.getArtifactId().equals(SCALA_LIBRARY_ARTIFACT_ID))
+            .findAny()
+            .map(Artifact::getVersion)
+            .map(DefaultArtifactVersion::new)
+            .orElseThrow(
+                () ->
+                    UncheckedMojoExecutionException.of(
+                        "missingDependency", SCALA_GROUP_ID, SCALA_LIBRARY_ARTIFACT_ID));
+    if (scalaVersion.compareTo(minimumScalaVersion) < 0)
+      throw UncheckedMojoExecutionException.of("scalaTooOld", scalaVersion, minimumScalaVersion);
+    session.getCurrentProject().getArtifacts().stream()
+        .filter(a -> crossId(a, "").isEmpty())
+        .collect(
+            groupingBy(
+                a -> a.getGroupId() + ":" + crossId(a, "$1"),
+                mapping(a -> crossId(a, "$2"), toSet())))
+        .entrySet()
+        .stream()
+        .filter(e -> e.getValue().size() > 1)
+        .sorted(comparing(e -> e.getKey()))
+        .map(e -> new Object[] {e.getKey(), e.getValue().stream().sorted().toArray(Object[]::new)})
+        .collect(collectingAndThen(toList(), Optional::of))
+        .filter(os -> !os.isEmpty())
+        .map(os -> UncheckedMojoExecutionException.of("conflictingCrossVersionSuffixes", os))
+        .ifPresent(
+            e -> {
+              throw e;
+            });
     Logger logger =
         new Logger() {
           @Override

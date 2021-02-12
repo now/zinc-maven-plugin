@@ -158,16 +158,22 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
                                   () ->
                                       UncheckedMojoExecutionException.of(
                                           "unsupportedLogLevel", l))));
-  private static final List<
-          Function<Couple<Enumeration.Value, String>, Couple<Enumeration.Value, String>>>
-      logFilters =
+  private static final Function<
+          Couple<Enumeration.Value, String>, Couple<Enumeration.Value, String>>
+      logFilter =
           asList(
-              r ->
-                  Optional.of("[" + r.fst().toString() + "] ")
-                      .filter(p -> r.snd().regionMatches(true, 0, p, 0, p.length()))
-                      .map(p -> r.mapSnd(s -> s.substring(p.length())))
-                      .orElse(r),
-              logFilter(Warn(), "(?s)Unexpected javac output: error: invalid flag: ([^\n]+)\n.*"));
+                  r ->
+                      Optional.of("[" + r.fst().toString() + "] ")
+                          .filter(p -> r.snd().regionMatches(true, 0, p, 0, p.length()))
+                          .map(p -> r.mapSnd(s -> s.substring(p.length())))
+                          .orElse(r),
+                  logFilter(
+                      Warn(), "(?s)Unexpected javac output: error: invalid flag: ([^\n]+)\n.*"))
+              .stream()
+              .reduce(
+                  identity(),
+                  Function<Couple<Enumeration.Value, String>, Couple<Enumeration.Value, String>>
+                      ::andThen);
   private static final ArtifactVersion minimumScalaVersion = new DefaultArtifactVersion("2.11.12");
   private static final List<String> scalaArtifactIds =
       asList(SCALA_LIBRARY_ARTIFACT_ID, "scala-reflect", SCALA_COMPILER_ARTIFACT_ID);
@@ -320,15 +326,22 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
             });
     Logger logger =
         new Logger() {
+          private final Function<
+                  Couple<Enumeration.Value, String>, Couple<Enumeration.Value, String>>
+              filter =
+                  Optional.of(
+                          Stream.concat(Stream.of(scalacArguments), Stream.of(javacArguments))
+                              .anyMatch("-Werror"::equals))
+                      .filter(b -> b)
+                      .map(
+                          b ->
+                              logFilter.andThen(r -> r.mapFst(l -> l.equals(Warn()) ? Error() : l)))
+                      .orElse(logFilter);
+
           @Override
           public void log(Enumeration.Value level, Function0<String> message) {
-            logFilters.stream()
-                .reduce(
-                    Couple.of(level, message.apply()),
-                    (r, f) -> f.apply(r),
-                    (a, b) -> {
-                      throw new AssertionError();
-                    })
+            filter
+                .apply(Couple.of(level, message.apply()))
                 .mapFst(levels::apply)
                 .accept((f, s) -> f.accept(getLog(), s));
           }

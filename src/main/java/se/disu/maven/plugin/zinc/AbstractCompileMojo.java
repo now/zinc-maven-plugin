@@ -87,6 +87,7 @@ import sbt.internal.inc.PlainVirtualFile;
 import sbt.internal.inc.PlainVirtualFileConverter;
 import sbt.internal.inc.RawCompiler;
 import sbt.internal.inc.ScalaInstance;
+import sbt.internal.inc.javac.JavaPosition;
 import sbt.io.AllPassFilter$;
 import sbt.util.Logger;
 import scala.Enumeration;
@@ -702,7 +703,10 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
                       .append(p.sourcePath().orElse("<unknown source>"))
                       .append(":")
                       .append(p.line().map(l -> l + ":").orElse(""))
-                      .append(p.offset().map(o -> (o + 1) + ":").orElse(""))
+                      .append(
+                          (p instanceof JavaPosition ? p.offset() : p.pointer())
+                              .map(c -> (c + 1) + ":")
+                              .orElse(""))
                       .append(" ")
                       .append(message.trim())
                       .append(p.lineContent().isEmpty() ? "" : "\n")

@@ -56,6 +56,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -486,6 +487,7 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
     AnalysisStore analysisStore = getCachedStore(binary(analysisCacheFile));
     @SuppressWarnings({"rawtypes", "unchecked"})
     T2<String, String>[] t2s = (T2<String, String>[]) new T2[] {};
+    Map<VirtualFile, DefinesClass> definesClasses = new ConcurrentHashMap<>();
     CompileResult cr =
         defaultIncrementalCompiler()
             .compile(
@@ -536,7 +538,7 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
 
                           @Override
                           public DefinesClass definesClass(VirtualFile cpe) {
-                            return Locate.definesClass(cpe);
+                            return definesClasses.computeIfAbsent(cpe, Locate::definesClass);
                           }
                         },
                         false,

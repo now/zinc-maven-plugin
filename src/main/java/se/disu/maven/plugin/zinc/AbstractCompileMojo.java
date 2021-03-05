@@ -585,12 +585,7 @@ public abstract class AbstractCompileMojo extends AbstractMojo {
         .or(
             () ->
                 Choice.of(getenv("JAVA_HOME"))
-                    .or(
-                        () ->
-                            Choice.of(getProperty("java.home"))
-                                .map(Paths::get)
-                                .map(Path::getParent)
-                                .map(Path::toString))
+                    .or(() -> Choice.of(getProperty("java.home")))
                     .map(Paths::get)
                     .map(p -> p.resolve("bin"))
                     .map(p -> p.resolve(name))
